@@ -30,8 +30,8 @@
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
-  --space-section:        140px;
-  --space-section-mobile: 72px;
+  --space-section:        100px;
+  --space-section-mobile: 60px;
   --max-width: 1240px;
   --gutter:    40px;
 
@@ -901,6 +901,117 @@ button { font: inherit; cursor: pointer; }
   .footer__inner { flex-direction: column; align-items: flex-start; }
   .footer__middle { order: 3; }
 }
+
+/* ───────────────────────────────────────────────────────────
+   FIXES: blank strip, hero layout, portfolio bezels
+   ─────────────────────────────────────────────────────────── */
+
+/* FIX 3 — eliminate the top blank strip */
+html { margin: 0; padding: 0; }
+
+/* FIX 1 — hero: two-column grid */
+.hero__inner {
+  display: grid;
+  grid-template-columns: 52fr 48fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+@media (max-width: 1020px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__visual { display: none; }
+}
+
+/* Hero: stacked product screenshot showcase */
+.hero__visual {
+  position: relative;
+  height: 430px;
+  flex-shrink: 0;
+}
+.hero__screen {
+  position: absolute;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.09);
+}
+.hero__screen img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.hero__screen--back {
+  width: 73%;
+  top: 44px;
+  right: -10px;
+  transform: rotate(5deg);
+  z-index: 1;
+  box-shadow:
+    0 16px 48px rgba(15,12,8,0.18),
+    0 6px 14px rgba(15,12,8,0.10);
+}
+.hero__screen--front {
+  width: 82%;
+  top: 0;
+  left: 0;
+  transform: rotate(-2.5deg);
+  z-index: 2;
+  box-shadow:
+    0 28px 72px rgba(15,12,8,0.28),
+    0 10px 24px rgba(15,12,8,0.15);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+.hero__visual:hover .hero__screen--front {
+  transform: rotate(-2.5deg) translateY(-12px);
+  box-shadow:
+    0 44px 100px rgba(15,12,8,0.36),
+    0 16px 40px rgba(15,12,8,0.2);
+}
+
+/* FIX 2 — portfolio: full-image screen-bezel frames */
+.project__frame {
+  background: #0D0D1A;
+  border-color: rgba(255,255,255,0.07);
+  transform: none; /* remove 3-D tilt so images aren't clipped */
+}
+.project__frame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 72px rgba(15,12,8,0.22), 0 12px 28px rgba(15,12,8,0.12);
+}
+/* Browser chrome bar */
+.project__frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 28px;
+  background: #111128;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  z-index: 3;
+  border-radius: 8px 8px 0 0;
+}
+/* macOS traffic-light dots */
+.project__frame::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 12px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #FF5F57;
+  box-shadow: 14px 0 0 #FFBD2E, 28px 0 0 #28C840;
+  z-index: 4;
+  pointer-events: none;
+}
+/* Image sits below the chrome bar and shows fully */
+.project__frame img {
+  top: 28px;
+  height: calc(100% - 28px);
+  object-fit: contain;
+  object-position: top center;
+  background: #0D0D1A;
+}
+.project__frame:hover img { transform: none; }
 </style>
 </head>
 <body>
@@ -939,26 +1050,47 @@ button { font: inherit; cursor: pointer; }
 <!-- ─── HERO ──────────────────────────────────────────────── -->
 <section class="hero">
   <div class="container hero__inner">
-    <div class="hero__kicker reveal">
-      <span class="dot"></span>
-      <span>Paradoqx &mdash; Independent AI &amp; software studio</span>
+
+    <!-- Left: headline + CTA -->
+    <div class="hero__content">
+      <div class="hero__kicker reveal">
+        <span class="dot"></span>
+        <span>Paradoqx &mdash; Independent AI &amp; software studio</span>
+      </div>
+      <h1 class="hero__headline reveal" style="--reveal-delay:100ms;">
+        Complexity, <em>resolved.</em>
+      </h1>
+      <p class="hero__sub reveal" style="--reveal-delay:220ms;">
+        We build AI systems, custom software, and intelligent tools
+        that help growing businesses run faster and smarter &mdash;
+        without the friction.
+      </p>
+      <div class="hero__cta reveal" style="--reveal-delay:340ms;">
+        <a href="#work" class="btn-primary">
+          See the work <span class="arrow">&rarr;</span>
+        </a>
+        <a href="#contact" class="btn-text">
+          Get in touch <span>&rarr;</span>
+        </a>
+      </div>
     </div>
-    <h1 class="hero__headline reveal" style="--reveal-delay:100ms;">
-      Complexity, <em>resolved.</em>
-    </h1>
-    <p class="hero__sub reveal" style="--reveal-delay:220ms;">
-      We build AI systems, custom software, and intelligent tools
-      that help growing businesses run faster and smarter &mdash;
-      without the friction.
-    </p>
-    <div class="hero__cta reveal" style="--reveal-delay:340ms;">
-      <a href="#work" class="btn-primary">
-        See the work <span class="arrow">&rarr;</span>
-      </a>
-      <a href="#contact" class="btn-text">
-        Get in touch <span>&rarr;</span>
-      </a>
+
+    <!-- Right: stacked product screenshots -->
+    <div class="hero__visual reveal" style="--reveal-delay:260ms;" aria-hidden="true">
+      <div class="hero__screen hero__screen--back">
+        <img
+          src="images/internal economic indicator/Screenshot 2026-05-17 193701.png"
+          alt="Economic Intelligence dashboard"
+        />
+      </div>
+      <div class="hero__screen hero__screen--front">
+        <img
+          src="images/financial screener/Screenshot 2026-05-17 192748.png"
+          alt="Financial Screener dashboard"
+        />
+      </div>
     </div>
+
   </div>
   <div class="hero__sig">Pune, India &middot; Available for projects &middot; 2026</div>
   <div class="hero__meta reveal" style="--reveal-delay:500ms;">
