@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Paradoqx — Option C: Clean Authority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Barlow', system-ui, sans-serif;
+  background: #FFFFFF;
+  color: #0F1729;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15,23,41,0.08);
+  z-index: 200;
+}
+.brand-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0F1729;
+}
+.brand-name em { font-style: italic; color: #E84B2A; }
+.nav-sep {
+  display: inline-block;
+  width: 1px; height: 14px;
+  background: rgba(15,23,41,0.15);
+  margin: 0 14px;
+  vertical-align: middle;
+}
+.brand-tag {
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(15,23,41,0.4);
+  font-weight: 400;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+  color: rgba(15,23,41,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #0F1729; }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 22px;
+  background: #E84B2A; color: #FFFFFF;
+  text-decoration: none;
+  transition: background 0.25s;
+}
+.nav-cta:hover { background: #0F1729; }
+
+/* ── HERO ───────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  align-items: center;
+  padding: 60px 52px 0;
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle background accent band */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 45%;
+  height: 100%;
+  background: #F8F9FC;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HERO CONTENT ───────────────────────────────── */
+.hero-left {
+  position: relative; z-index: 1;
+  padding-right: 48px;
+  padding-bottom: 60px;
+  padding-top: 20px;
+}
+
+.kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: #E84B2A;
+  margin-bottom: 24px;
+}
+.kicker-line {
+  width: 28px; height: 2px;
+  background: #E84B2A; flex-shrink: 0;
+}
+
+h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(44px, 5.8vw, 80px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #0F1729;
+  margin-bottom: 20px;
+  max-width: 14ch;
+}
+h1 em {
+  font-style: italic;
+  color: #E84B2A;
+  display: block;
+}
+
+.hero-sub {
+  font-size: 16px; line-height: 1.65;
+  color: rgba(15,23,41,0.55);
+  max-width: 46ch; margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.cta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px;
+  background: #0F1729; color: #FFFFFF;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+  text-decoration: none; text-transform: uppercase;
+  transition: background 0.25s;
+}
+.btn-primary:hover { background: #E84B2A; }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  border: 1.5px solid rgba(15,23,41,0.2);
+  color: rgba(15,23,41,0.65);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+  text-decoration: none; text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: #0F1729; color: #0F1729; }
+
+.stats-row {
+  display: flex; gap: 0;
+  margin-top: 44px; padding-top: 28px;
+  border-top: 2px solid rgba(15,23,41,0.08);
+}
+.stat {
+  padding-right: 32px;
+  border-right: 1px solid rgba(15,23,41,0.1);
+  margin-right: 32px;
+}
+.stat:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px; font-weight: 700;
+  letter-spacing: -0.02em; color: #0F1729;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.stat-val em { font-style: normal; color: #E84B2A; }
+.stat-label {
+  font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(15,23,41,0.4);
+  font-weight: 400;
+}
+
+/* ── GEOMETRIC SVG ──────────────────────────────── */
+.hero-right {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  height: 100vh; max-height: 620px;
+  padding: 40px 0 60px;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+@keyframes dash-rotate {
+  to { stroke-dashoffset: -120; }
+}
+
+.ring-1 {
+  transform-origin: 240px 250px;
+  animation: spin-slow 22s linear infinite;
+}
+.ring-2 {
+  transform-origin: 240px 250px;
+  animation: spin-reverse 16s linear infinite;
+}
+.ring-3 {
+  transform-origin: 240px 250px;
+  animation: spin-slow 30s linear infinite;
+}
+.core-pulse {
+  transform-origin: 240px 250px;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+.dash-ring {
+  stroke-dasharray: 12 6;
+  animation: dash-rotate 8s linear infinite;
+  transform-origin: 240px 250px;
+}
+
+@media (max-width: 860px) {
+  nav { padding: 0 24px; }
+  .nav-links, .nav-cta { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 76px 24px 40px; }
+  .hero::before { display: none; }
+  .hero-left { padding-right: 0; padding-bottom: 40px; }
+  .hero-right { display: none; }
+  .stats-row { gap: 0; }
+  .stat { padding-right: 20px; margin-right: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <span class="brand-name">Parado<em>q</em>x</span>
+    <span class="nav-sep"></span>
+    <span class="brand-tag">Complexity, resolved</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">Testimonials</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="mailto:kedar@dczion.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<section class="hero">
+
+  <div class="hero-left">
+    <div class="kicker">
+      <span class="kicker-line"></span>
+      Independent AI &amp; software studio, Pune
+    </div>
+
+    <h1>Complexity, <em>resolved.</em></h1>
+
+    <p class="hero-sub">
+      We build AI systems, custom software, and intelligent tools
+      that help growing businesses run faster and smarter
+      without the friction.
+    </p>
+
+    <div class="cta-row">
+      <a href="#" class="btn-primary">See the work &rarr;</a>
+      <a href="#" class="btn-outline">Get in touch</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-val">9<em>+</em></div>
+        <div class="stat-label">Service lines</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">21<em>+</em></div>
+        <div class="stat-label">Phases shipped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">100<em>%</em></div>
+        <div class="stat-label">Custom built</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right" aria-hidden="true">
+    <svg viewBox="0 0 480 500" fill="none" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%; max-width:460px; height:auto;">
+
+      <!-- Outer decorative rings (spinning) -->
+      <g class="ring-3">
+        <circle cx="240" cy="250" r="210"
+                stroke="rgba(15,23,41,0.04)" stroke-width="1.5"/>
+        <!-- Tick marks on outer ring -->
+        <line x1="240" y1="40" x2="240" y2="52" stroke="rgba(15,23,41,0.15)" stroke-width="1.5"/>
+        <line x1="240" y1="448" x2="240" y2="460" stroke="rgba(15,23,41,0.15)" stroke-width="1.5"/>
+        <line x1="30" y1="250" x2="42" y2="250" stroke="rgba(15,23,41,0.15)" stroke-width="1.5"/>
+        <line x1="438" y1="250" x2="450" y2="250" stroke="rgba(15,23,41,0.15)" stroke-width="1.5"/>
+        <!-- Diagonal ticks -->
+        <line x1="91" y1="91" x2="99" y2="99" stroke="rgba(15,23,41,0.1)" stroke-width="1"/>
+        <line x1="381" y1="381" x2="389" y2="389" stroke="rgba(15,23,41,0.1)" stroke-width="1"/>
+        <line x1="381" y1="119" x2="389" y2="111" stroke="rgba(15,23,41,0.1)" stroke-width="1"/>
+        <line x1="99" y1="409" x2="91" y2="401" stroke="rgba(15,23,41,0.1)" stroke-width="1"/>
+      </g>
+
+      <!-- Dashed rotating ring -->
+      <circle class="dash-ring" cx="240" cy="250" r="168"
+              stroke="#E84B2A" stroke-width="1"
+              stroke-dasharray="10 8" opacity="0.25"/>
+
+      <!-- Main spinning ring with nodes -->
+      <g class="ring-1">
+        <circle cx="240" cy="250" r="140"
+                stroke="rgba(15,23,41,0.08)" stroke-width="1.5"/>
+        <!-- Orbit nodes on ring-1 -->
+        <circle cx="240" cy="110" r="5" fill="#E84B2A"/>
+        <circle cx="240" cy="110" r="11" fill="none" stroke="#E84B2A" stroke-width="1" opacity="0.3"/>
+        <circle cx="368" cy="180" r="4" fill="#0F1729" opacity="0.6"/>
+        <circle cx="368" cy="320" r="3.5" fill="#E84B2A" opacity="0.5"/>
+        <circle cx="240" cy="390" r="4" fill="#0F1729" opacity="0.5"/>
+        <circle cx="112" cy="320" r="5" fill="#E84B2A"/>
+        <circle cx="112" cy="180" r="3.5" fill="#0F1729" opacity="0.4"/>
+      </g>
+
+      <!-- Counter-spinning ring with nodes -->
+      <g class="ring-2">
+        <circle cx="240" cy="250" r="96"
+                stroke="rgba(232,75,42,0.15)" stroke-width="1.5"/>
+        <!-- Orbit nodes on ring-2 -->
+        <circle cx="240" cy="154" r="4" fill="#E84B2A" opacity="0.7"/>
+        <circle cx="323" cy="298" r="5" fill="#0F1729" opacity="0.6"/>
+        <circle cx="157" cy="298" r="4" fill="#E84B2A" opacity="0.5"/>
+        <circle cx="323" cy="202" r="3" fill="#E84B2A" opacity="0.4"/>
+      </g>
+
+      <!-- Inner solid ring -->
+      <circle cx="240" cy="250" r="64"
+              stroke="rgba(15,23,41,0.1)" stroke-width="1.5" fill="none"/>
+
+      <!-- Centre core -->
+      <g class="core-pulse">
+        <circle cx="240" cy="250" r="36" fill="rgba(232,75,42,0.08)"/>
+        <circle cx="240" cy="250" r="24" fill="rgba(232,75,42,0.15)"/>
+        <circle cx="240" cy="250" r="14" fill="#E84B2A"/>
+      </g>
+      <circle cx="240" cy="250" r="7" fill="white" opacity="0.6"/>
+
+      <!-- Cross-hairs -->
+      <line x1="240" y1="216" x2="240" y2="228"
+            stroke="rgba(15,23,41,0.2)" stroke-width="1"/>
+      <line x1="240" y1="272" x2="240" y2="284"
+            stroke="rgba(15,23,41,0.2)" stroke-width="1"/>
+      <line x1="206" y1="250" x2="218" y2="250"
+            stroke="rgba(15,23,41,0.2)" stroke-width="1"/>
+      <line x1="262" y1="250" x2="274" y2="250"
+            stroke="rgba(15,23,41,0.2)" stroke-width="1"/>
+
+      <!-- Corner label system -->
+      <text x="20" y="36" font-family="'Barlow Condensed',sans-serif" font-size="9"
+            fill="rgba(15,23,41,0.25)" letter-spacing="0.18em" font-weight="600"
+            text-transform="uppercase">PARADOQX</text>
+      <text x="20" y="48" font-family="'Barlow Condensed',sans-serif" font-size="8"
+            fill="rgba(232,75,42,0.5)" letter-spacing="0.15em" font-weight="400">SYSTEM v1.0</text>
+
+      <!-- Degree markers -->
+      <text x="236" y="96" font-family="'Barlow',sans-serif" font-size="8"
+            fill="rgba(15,23,41,0.2)" text-anchor="middle">0°</text>
+      <text x="384" y="254" font-family="'Barlow',sans-serif" font-size="8"
+            fill="rgba(15,23,41,0.2)">90°</text>
+      <text x="236" y="408" font-family="'Barlow',sans-serif" font-size="8"
+            fill="rgba(15,23,41,0.2)" text-anchor="middle">180°</text>
+      <text x="80" y="254" font-family="'Barlow',sans-serif" font-size="8"
+            fill="rgba(15,23,41,0.2)" text-anchor="end">270°</text>
+    </svg>
+  </div>
+
+</section>
+</body>
+</html>
